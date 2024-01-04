@@ -3,157 +3,125 @@
 <html>
 <head>
 <title>{{ ver }}-设备信息</title>
-<link rel="shortcut icon" href="{% static 'images/icon.ico' %}">
+<link rel="shortcut icon" href="{% static 'image/logo.png' %}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-* {
-    box-sizing: border-box;
-}
-
-/* body 样式 */
-body {
-    font-family: Arial;
-    margin: 0;
-}
-
-/* 标题 */
-.header {
-    padding: 80px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-}
-
-/* 标题字体加大 */
-.header h1 {
-    font-size: 40px;
-}
-
-/* 导航 */
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-}
-
-/* 导航栏样式 */
-.navbar a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-/* 右侧链接*/
-.navbar a.right {
-    float: right;
-}
-
-/* 鼠标移动到链接的颜色 */
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* 列容器 */
-.row {
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-}
-
-
-/* 主要的内容区域 */
-.main {
-    -ms-flex: 70%; /* IE10 */
-    flex: 70%;
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.main table {
-    margin: 0 auto;
-}
-
-
-/* 底部 */
-.footer {
-    padding: 20px;
-    text-align: center;
-    background: #ddd;
-}
-
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 700px 时, 让两栏上下堆叠显示 */
-@media screen and (max-width: 700px) {
-    .row {
-        flex-direction: column;
+    .main {
+        text-align: center;
+        flex: 70%;
     }
-}
-
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 400px 时, 让导航栏目上下堆叠显示 */
-@media screen and (max-width: 400px) {
-    .navbar a {
-        float: none;
-        width: 100%;
-    }
-}
 </style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <script>
+        function jumpp() {
+            var loc = document.getElementsByName('loc')[0].value;
+            var classif = document.getElementsByName('type')[0].value;
+            window.location.href = '/equipment?loc=' + loc + '&type=' + classif;
+        }
+
+
+        window.onload = function() {
+            const table = document.getElementById('mytable');
+            console.log(table)
+            const l = table.rows.length;
+            console.log(l)
+            let cnt = 0;
+            let tmp = '';
+            let startval = 0;
+            for (let i = 0; i < l; i++) {
+                const val = table.rows[i].cells[0].innerText;
+                if (i === l - 1) {
+                    {#table.rows[i].removeChild(table.rows[i].cells[0])#}
+                    table.rows[startval].cells[0].rowSpan = cnt + 1
+                }
+                if (val !== tmp) {
+                    if (i !== 0) {
+                        table.rows[startval].cells[0].rowSpan = cnt
+                    }
+                    cnt = 1;
+                    tmp = val;
+                    startval = i;
+                } else {
+                    cnt++;
+                    table.rows[i].removeChild(table.rows[i].cells[0])
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 <form action="/equipment" method="post">
 {% csrf_token %}
 <div class="header">
-  <h1>{{ ver }}-设备信息</h1>
-  <p>CNPC Equipment Platform</p>
+    <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
+      <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
+    </a>
+  <h1>&nbsp;&nbsp;{{ ver }}-设备信息</h1>
+    <div class="right" style="top: 30%">
+        <input name="word" placeholder="请输入关键词">
+        <input type="submit" value="搜索" name="search">
+    </div>
 </div>
 
 <div class="navbar">
-  <a href="/">返回主页</a>
+      <a href="/">首页</a>
+      <a href="/info">平台简介</a>
+      <a href="/equipment">仪器列表</a>
+      <a href="/question">常见问题</a>
+      <a href="/contact">联系我们</a><br />
 </div>
 
 <div class="row">
   <div class="main">
-      <h3>{{ loc }}设备列表 - {{ type }}</h3>
 
+  设备所在地&nbsp;&nbsp;&nbsp;&nbsp;<select name="loc" style="width: 200px">
+          {% for item in city_box %}
+              <option>{{ item }}</option>
+          {% endfor %}
+          </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          设备分类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="type" style="width: 200px">
+          {% for item in class_box %}
+              <option>{{ item }}</option>
+          {% endfor %}
+          </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="javascript:jumpp()">查找</a><br /><br />
+      <hr /><br />
 
-    <table border="1">
+      <h3>{{ loc }}仪器列表 - {{ type }}</h3><br/>
+    <table border="1" id="mytable">
         <tr>
-            <th>id</th>
+            <th>分类</th>
             <th>设备名称</th>
             <th>仪器品牌</th>
             <th>仪器型号</th>
             <th>预约方式</th>
             <th>设备状态</th>
-            <th>设备所在地</th>
+            <th>设备地点</th>
             <th>操作</th>
         </tr>
         {% for item in data %}
             <tr>
-                <td>{{ item.id }}</td>
+                <td>{{ item.classic }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.brand }}</td>
                 <td>{{ item.num }}</td>
                 <td>{{ item.book }}</td>
                 <td>{{ item.status }}</td>
-                <td>{{ item.locate }}</td>
+                <td>{{ item.city }}</td>
                 <td>
                     <a href="/equipment/detail/{{ item.id }}">详细信息</a>
-                    <a href="/equipment/book/{{ item.id }}">预约</a>
                 </td>
             </tr>
         {% endfor %}
-    </table></br>
+    </table><br />
   <a href="/">返回主页</a>
   </div>
 </div>
 
 <div class="footer">
   <h2>
-      powered by elepikachu
+      powered by CNPC
   </h2>
 </div>
 </form>

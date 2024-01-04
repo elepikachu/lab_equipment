@@ -116,8 +116,10 @@ body {
 .show {
     width: 50%;
     background-color: lightyellow;
+    line-height: 70%;
     padding: 20px;
     height: 400px;
+    text-align: center;
 }
 
 .focus {

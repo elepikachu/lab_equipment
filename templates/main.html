@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>{{ ver }}</title>
-<link rel="shortcut icon" href="{% static 'image/icon.ico' %}">
+<link rel="shortcut icon" href="{% static 'image/logo.png' %}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -17,20 +17,17 @@
         background-size: cover;
     }
 
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 700px 时, 让两栏上下堆叠显示 */
-@media screen and (max-width: 700px) {
-    .row {
-        flex-direction: column;
+    .main {
+        line-height: 70%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: row;
     }
-}
 
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 400px 时, 让导航栏目上下堆叠显示 */
-@media screen and (max-width: 400px) {
-    .navbar a {
-        float: none;
-        width: 100%;
+    .show {
+        line-height: 70%;
+        text-align: center;
     }
-}
 </style>
 <script src="{% static 'js/swiper.min.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
@@ -52,13 +49,11 @@
 </div>
 
 <div class="navbar">
-      <a href="/"></a>
-          <a href="/"></a>
       <a href="/">首页</a>
       <a href="info">平台简介</a>
       <a href="equipment">仪器列表</a>
       <a href="question">常见问题</a>
-      <a href="suggest">联系我们</a><br />
+      <a href="contact">联系我们</a><br />
   </div>
 
 <div class="row">
@@ -87,6 +82,7 @@
       <div class="swiper-slide"><a href="equipment/detail/1"><img src="{% static 'image/1.jpg' %}" width="656px" height="400px" align="center"></a></div>
       <div class="swiper-slide"><a href="equipment/detail/5"><img src="{% static 'image/5.jpg' %}" width="656px" height="400px" align="center"></a></div>
       <div class="swiper-slide"><a href="equipment/detail/14"><img src="{% static 'image/14.jpg' %}" width="656px" height="400px" align="center"></a></div>
+      <div class="swiper-slide"><a href="equipment/detail/17"><img src="{% static 'image/17.jpg' %}" width="656px" height="400px" align="center"></a></div>
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -95,7 +91,7 @@
               </div>
   </div>
   <div class="bottom">
-      <h5>使用统计</h5>
+      <h5>仪器统计</h5>
       共{{ cnt.a }}台仪器<br/>
       {{ cnt.b }}台正在使用<br/>
       {{ cnt.c }}台待机中<br/>

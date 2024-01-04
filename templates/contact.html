@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<title>{{ ver }}-使用说明</title>
+<link rel="shortcut icon" href="{% static 'image/logo.png' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .main {
+        text-align: center;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+{% csrf_token %}
+<form action="/contact" method="post">
+<div class="header">
+  <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
+      <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
+    </a>
+  <h1>&nbsp;&nbsp;中国石油&nbsp;|&nbsp;{{ ver }}-联系我们</h1>
+</div>
+
+<div class="navbar">
+      <a href="/">首页</a>
+      <a href="info">平台简介</a>
+      <a href="equipment">仪器列表</a>
+      <a href="question">常见问题</a>
+      <a href="contact">联系我们</a><br />
+</div>
+
+<div class="row">
+  <div class="main">
+      <p>
+          <h2 align="center">联系我们</h2><br /><br />
+      如果使用过程中有任何意见或建议，请填写下表并提交~<br/><br/>也可致电83599543 周泽,或发送邮件至zhouze1997@petrochina.com.cn。感谢使用！^_^<br/><br/>
+      意见分类：
+          <select name="typ">
+              <option>平台使用BUG</option>
+              <option>新功能建议</option>
+              <option>预约问题</option>
+              <option>给点鼓励</option>
+              <option>其他</option>
+          </select><br/><br/>
+      <textarea id="sug" name="sug" cols="80" rows="8"></textarea><br/><br/><br/>
+      <input type="reset" name="res" size="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit" name="sub" size="5" onclick="alert('提交成功')">
+  </div>
+</div>
+
+<div class="footer">
+  <h2>
+      powered by CNPC
+  </h2>
+</div>
+
+</body>
+</html>

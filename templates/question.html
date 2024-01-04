@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<title>{{ ver }}-常见问题</title>
+<link rel="shortcut icon" href="{% static 'image/logo.png' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .main {
+        text-align: center;
+    }
+
+    .main table {
+        text-align: left;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+
+<div class="header">
+  <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
+      <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
+    </a>
+  <h1>&nbsp;&nbsp;中国石油&nbsp;|&nbsp;{{ ver }}-常见问题</h1>
+</div>
+
+<div class="navbar">
+      <a href="/">首页</a>
+      <a href="info">平台简介</a>
+      <a href="equipment">仪器列表</a>
+      <a href="question">常见问题</a>
+      <a href="contact">联系我们</a><br />
+</div>
+
+<div class="row">
+  <div class="main">
+      <p>
+          <h2 align="center">常见问题</h2><br /><br />
+<table border="0" style="border: 1px">
+            <tr><td>Q1:如何预约仪器设备</td></tr>
+                <tr><td>A1:目前仅提供电话预约，请按照网页上的电话联系设备管理人员进行预约服务。<br /><br /></td></tr>
+                <tr><td> Q2:若设备不可用，如何查询设备什么时候可用</td></tr>
+                <tr><td>A2:请致电项目组咨询 83599543 赵永明</td></tr>
+    </table><br />
+  </div>
+</div>
+
+<div class="footer">
+  <h2>
+      powered by CNPC
+  </h2>
+</div>
+
+</body>
+</html>

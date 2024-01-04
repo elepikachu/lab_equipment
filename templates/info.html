@@ -3,128 +3,65 @@
 <html>
 <head>
 <title>{{ ver }}-使用说明</title>
-<link rel="shortcut icon" href="{% static 'images/icon.ico' %}">
+<link rel="shortcut icon" href="{% static 'image/logo.png' %}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-* {
-    box-sizing: border-box;
-}
-
-/* body 样式 */
-body {
-    font-family: Arial;
-    margin: 0;
-}
-
-/* 标题 */
-.header {
-    padding: 30px;
-    text-align: center;
-    background: darkgray;
-    color: white;
-}
-
-/* 标题字体加大 */
-.header h1 {
-    font-size: 40px;
-}
-
-/* 导航 */
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-}
-
-/* 导航栏样式 */
-.navbar a {
-    float: bottom;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-/* 鼠标移动到链接的颜色 */
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* 列容器 */
-.row {
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-}
-
-
-.side h5 {
-    font-size: 20px;
-}
-
-.side a {
-    font-size: 20px;
-}
-
-/* 主要的内容区域 */
-.main {
-    -ms-flex: 70%; /* IE10 */
-    flex: 70%;
-    height: 600px;
-    background-color: lightcyan;
-    padding: 20px;
-}
-
-
-/* 底部 */
-.footer {
-    padding: 20px;
-    text-align: center;
-    background: #ddd;
-}
-
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 700px 时, 让两栏上下堆叠显示 */
-@media screen and (max-width: 700px) {
-    .row {
-        flex-direction: column;
+    .main {
+        font-size: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: row;
+        background-color: paleturquoise;
     }
-}
-
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 400px 时, 让导航栏目上下堆叠显示 */
-@media screen and (max-width: 400px) {
-    .navbar a {
-        float: none;
-        width: 100%;
+    .show {
+        line-height: 120%;
+        background-color: paleturquoise;
     }
-}
+    .side {
+        background-image: url({% static 'image/大院.png' %});
+        background-size: cover;
+    }
+    .bottom {
+        background-image: url({% static 'image/cnpc.png' %});
+        background-size: cover;
+    }
 </style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
 <body>
 
 <div class="header">
-  <h1>{{ ver }}-使用说明</h1>
-  <p>Welcome to elepikachu's tool site</p>
+  <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
+      <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
+    </a>
+  <h1>&nbsp;&nbsp;中国石油&nbsp;|&nbsp;{{ ver }}-工具使用说明</h1>
 </div>
 
 <div class="navbar">
-  <a href="/">返回首页</a>
+      <a href="/">首页</a>
+      <a href="info">平台简介</a>
+      <a href="equipment">仪器列表</a>
+      <a href="question">常见问题</a>
+      <a href="contact">联系我们</a><br />
 </div>
 
 <div class="row">
   <div class="main">
-      <p>
-          <b>工具使用说明</b><br /><br />
-          待完善...<br /><br />
-      </p>
+      <div class="side"></div>
+      <div class="show">
+          <h2 align="center">平台简介</h2><br /><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为深入贯彻落实勘探院关于提高科研仪器设备利用率，打造开放共享的科研仪器使用机制等相关指示要求，智能控制与装备研究所（交叉学科研究中心）搭建了所级大型科研仪器共享平台，促进仪器设备开放共享，提高科研设备使用效益。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台包含所内20余台套大型科研仪器设备，包括材料制备合成、材料表征分析测试、新能源材料与装备测试、油气勘探开发工具测试等多学科、多领域的仪器设备。上述仪器设备具 有先进的性能指标，良好的运行状态，设备操作人员具有熟练的操作技巧和较强的科研服务意识，能够为广大用户提供优良的测试服务。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台仪器设备实行预约制，面向院内外开放共享，有偿服务。欢迎广大科研人员预约联系，送样测试。<br /><br />
+          </div>
+      <div class="bottom"></div>
   </div>
 </div>
 
 <div class="footer">
   <h2>
-      powered by elepikachu
+      powered by CNPC
   </h2>
 </div>
 

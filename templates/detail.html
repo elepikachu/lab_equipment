@@ -3,191 +3,172 @@
 <html>
 <head>
 <title>{{ ver }}-设备信息</title>
-<link rel="shortcut icon" href="{% static 'images/icon.ico' %}">
+<link rel="shortcut icon" href="{% static 'image/icon.ico' %}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-* {
-    box-sizing: border-box;
-}
-
-/* body 样式 */
-body {
-    font-family: Arial;
-    margin: 0;
-}
-
-/* 标题 */
-.header {
-    padding: 80px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-}
-
-/* 标题字体加大 */
-.header h1 {
-    font-size: 40px;
-}
-
-/* 导航 */
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-}
-
-/* 导航栏样式 */
-.navbar a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-/* 右侧链接*/
-.navbar a.right {
-    float: right;
-}
-
-/* 鼠标移动到链接的颜色 */
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* 列容器 */
-.row {
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-}
-
-
-/* 主要的内容区域 */
-.main {
-    -ms-flex: 70%; /* IE10 */
-    flex: 70%;
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.main table {
-    margin: 0 auto;
-}
-
-
-/* 底部 */
-.footer {
-    padding: 20px;
-    text-align: center;
-    background: #ddd;
-}
-
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 700px 时, 让两栏上下堆叠显示 */
-@media screen and (max-width: 700px) {
-    .row {
-        flex-direction: column;
+    .main {
+        text-align: center;
+        flex: 70%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: row;
     }
-}
 
-/* 响应式布局 - 在屏幕设备宽度尺寸小于 400px 时, 让导航栏目上下堆叠显示 */
-@media screen and (max-width: 400px) {
-    .navbar a {
-        float: none;
-        width: 100%;
+    .main table td {
+        text-align: left;
     }
-}
+
+    .navbar {
+        font-size: 16px;
+    }
+
+    .side table {
+        line-height: 50px;
+    }
+
+    .side table td {
+        text-align: center;
+    }
+
+    .ct table {
+        line-height: 50px;
+    }
+
+    .ct table td {
+        text-align: center;
+    }
+
+    .middle{
+        width: 70%;
+    }
 </style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<script src="{% static 'js/easytabs.js' %}"></script>
 </head>
 <body>
 <form action="/equipment" method="post">
 {% csrf_token %}
 <div class="header">
-  <h1>{{ ver }}-{{ item.name }}</h1>
-  <p>CNPC Equipment Platform</p>
+    <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
+      <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
+    </a>
+  <h1>&nbsp;&nbsp;{{ ver }}-{{ item.name }}</h1>
 </div>
 
 <div class="navbar">
-  <a href="/">返回主页</a>
+      <a href="/">首页</a>
+      <a href="/info">平台简介</a>
+      <a href="/equipment">仪器列表</a>
+      <a href="/question">常见问题</a>
+      <a href="/contact">联系我们</a><br />
 </div>
-
 <div class="row">
-  <div class="main">
+    <div class="main"><div class="side">
+    <table border="0" style="border: 1px">
+    <tr>
+            <th>{{ loc }} - {{ type }}</th>
+        </tr>
+        {% for item in data %}
+            <tr>
+                <td>
+                    <a href="/equipment/detail/{{ item.id }}">{{ item.name }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table><br />
+    </div>
+        <div class="middle">
+  <div class="menu">
+<ul>
+<li><a href="#" onmouseover="easytabs('1', '1');" onfocus="easytabs('1', '1');" onclick="return false;"  title="" id="tablink1">仪器信息</a></li>
+<li><a href="#" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');" onclick="return false;"  title="" id="tablink2">仪器图片 </a></li>
+<li><a href="#" onmouseover="easytabs('1', '3');" onfocus="easytabs('1', '3');" onclick="return false;"  title="" id="tablink3">样品要求 </a></li>
+<li><a href="#" onmouseover="easytabs('1', '4');" onfocus="easytabs('1', '4');" onclick="return false;"  title="" id="tablink4">仪器预约</a>
+</li>
+</ul>
+</div>
+  <div id="tabcontent1">
       <h2>{{ item.name }}</h2>
-      <p> <img src="/static/{{ img }}" width="200px" height="200px" align="center"><br>
+      <p> <img src="/static/{{ img }}" width="200px" height="150px" align="center"><br>
         <br>
       </p>
       <table width="800" border="1">
         <tbody>
           <tr>
-            <th scope="row" width="100">&nbsp;负责科室</th>
-            <td>{{ item.lab }}&nbsp;</td>
-          </tr>
-          <tr>
-            <th scope="row">&nbsp;支撑课题</th>
-            <td>&nbsp;{{ item.research }}</td>
-          </tr>
-          <tr>
-            <th scope="row">&nbsp;设备品牌</th>
+            <th scope="row" width="100">&nbsp;设备品牌</th>
             <td>{{ item.brand }}&nbsp;</td>
           </tr>
           <tr>
             <th scope="row">&nbsp;引进时间</th>
-            <td>&nbsp;{{ item.time }}</td>
+            <td>{{ item.time }}</td>
           </tr>
           <tr>
             <th scope="row">仪器型号&nbsp;</th>
-            <td>&nbsp;{{ item.num }}</td>
+            <td>{{ item.num }}</td>
           </tr>
           <tr>
-            <th scope="row">设备所在地&nbsp;</th>
-            <td>&nbsp;{{ item.city }} - {{ item.locate }}</td>
+            <th scope="row">设备地点&nbsp;</th>
+            <td>{{ item.city }} - {{ item.locate }}</td>
           </tr>
           <tr>
             <th scope="row">&nbsp;功能用途</th>
-            <td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.function }}</td>
+            <td>{{ item.function }}</td>
           </tr>
           <tr>
             <th scope="row">&nbsp;关键参数</th>
-            <td align="left">&nbsp;{{ item.para }}</td>
+            <td>{{ item.para }}</td>
           </tr>
           <tr>
             <th scope="row">&nbsp;关键配件</th>
-            <td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.detail }}</td>
-          </tr>
-          <tr>
-            <th scope="row">&nbsp;预约方式</th>
-            <td>&nbsp;{{ item.book }}</td>
+            <td>{{ item.detail }}</td>
           </tr>
           <tr>
             <th scope="row">&nbsp;设备状态</th>
             <td>&nbsp;{{ item.status }}</td>
           </tr>
-          <tr>
-            <th scope="row">&nbsp;设备负责人</th>
-            <td>&nbsp;{{ item.people }}</td>
-          </tr>
         </tbody>
       </table>
       {% if item.status == '正常，待机' %}
       <h3><font color="green">可预约</font></h3><br/>
-      <input type="submit" name="booke" value="预约使用">
+      {% else %}
+      <h3><font color="red">不可预约</font></h3><br/>
+      {% endif %}
+      <input type="submit" name="print" value="信息打印"><br /><br />
+      <a href="javascript:history.back()">返回上页</a>
+  </div>
+  <div id="tabcontent2"><img src="/static/{{ img }}" width="800px" height="600px" align="center"><br></div>
+
+<div id="tabcontent3" class="ct">待补充</div>
+
+<div id="tabcontent4" class="ct">
+<table border="0" style="border: 1px">
+        <tr>
+            <th>{{ item.name }}预约说明</th>
+        </tr>
+            <tr><td>检测费用：{{ item.price }}元/小时</td></tr>
+                <tr><td>预约方式：{{ item.book }}</td></tr>
+                <tr><td>联系人：{{ item.people }}</td></tr>
+                <tr><td>联系方式：{{ item.contact }}</td>
+            </tr>
+    </table><br />
+
+    {% if item.status == '正常，待机' %}
+      <h3><font color="green">可预约</font></h3><br/>
+      <input type="submit" name="booke" value="线上预约">
       {% else %}
       <h3><font color="red">不可预约</font></h3><br/>
       <input type="submit" name="notify" value="可用时通知我">
       {% endif %}
-      <input type="submit" name="print" value="信息打印">
-      <a href="javascript:history.back()">返回上页</a>
+</div>
+    </div>
   </div>
 </div>
 
 <div class="footer">
   <h2>
-      powered by elepikachu
+      powered by CNPC
   </h2>
 </div>
 </form>

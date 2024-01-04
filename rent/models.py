@@ -19,4 +19,15 @@ class Item(models.Model):
     locate = models.CharField('设备所在地', max_length=20, default='')
     lab = models.CharField('负责科室', max_length=20, default='')
     people = models.CharField('负责人', max_length=20, default='')
+    contact = models.CharField('联系方式', max_length=60, default='')
+    price = models.IntegerField('价格', default=0)
+
+
+class Suggestion(models.Model):
+    id = models.IntegerField('建议编号', primary_key=True)
+    ip = models.CharField('操作ip', max_length=50, default='')
+    date = models.DateTimeField('提出时间')
+    type = models.CharField('建议类型', max_length=30, default='')
+    detail = models.CharField('建议', max_length=500, default='')
+    finish = models.BooleanField('是否完成', default=False)
 

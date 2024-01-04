@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+}
+
+/* body 样式 */
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+/* 标题 */
+.header {
+    padding: 30px;
+    text-align: left;
+    background: #fed71a;
+    white-space: nowrap;
+    color: white;
+}
+
+.header img {
+    float: left;
+}
+
+.header .right {
+    float: right;
+}
+
+/* 标题字体加大 */
+.header h1 {
+    font-size: 30px;
+}
+
+
+/* 列容器 */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+}
+
+/* 创建两个列 */
+
+.top h5 {
+    font-size: 20px;
+}
+
+.top a {
+    font-size: 20px;
+}
+
+/* 主要的内容区域 */
+/* 导航 */
+.navbar {
+    overflow: hidden;
+    background-color: #fe3f1a;
+}
+
+/* 导航栏样式 */
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    width: 200px;
+}
+
+
+.main{
+    height: 450px;
+    background-color: lightyellow;
+    line-height: 70%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+}
+
+.side {
+    width: 25%;
+    line-height: 70%;
+    padding: 20px;
+    font-size: 20px;
+    height: 400px;
+    text-align: center;
+}
+
+/* 边栏 */
+.bottom {
+    width: 25%;
+    background-color: lightsalmon;
+    padding: 20px;
+    line-height: 150%;
+    height: 400px;
+    text-align: center;
+}
+
+.side, .bottom, .show h5 {
+    font-size: 20px;
+}
+
+.side select {
+    font-size: 20px;
+    text-align: center;
+}
+
+.show {
+    width: 50%;
+    background-color: lightyellow;
+    line-height: 70%;
+    padding: 20px;
+    height: 400px;
+    text-align: center;
+}
+
+.focus {
+    top:5px;
+    height: 280px;
+    width: 100%;
+    background-color: #e35f5f;
+}
+
+/* 底部 */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

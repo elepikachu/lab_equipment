@@ -5,10 +5,12 @@ from lab_equipment.views import VERSION
 
 def equipment_view(request):
     if request.method == 'GET':
-        loc = request.GET['loc']
-        lab = request.GET['lab']
-        type = request.GET['type']
-        data = Item.objects.filter(city__exact=loc, lab__exact=lab, classic__exact=type)
+        if 'loc' in request.GET:
+            loc = request.GET['loc']
+            type = request.GET['type']
+            data = Item.objects.filter(city__exact=loc, classic__exact=type)
+        else:
+            data = Item.objects.all()
         ver = VERSION
         return render(request, 'equipment.html', locals())
 

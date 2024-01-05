@@ -48,7 +48,7 @@
 <script src="{% static 'js/easytabs.js' %}"></script>
 </head>
 <body>
-<form action="/equipment" method="post">
+<form action="/equipment/" method="post">
 {% csrf_token %}
 <div class="header">
     <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
@@ -68,7 +68,7 @@
     <div class="main"><div class="side">
     <table border="0" style="border: 1px">
     <tr>
-            <th>{{ loc }} - {{ type }}</th>
+            <th>{{ loc }} - {{ classic }}</th>
         </tr>
         {% for item in data %}
             <tr>
@@ -91,7 +91,7 @@
 </div>
   <div id="tabcontent1">
       <h2>{{ item.name }}</h2>
-      <p> <img src="/static/{{ img }}" width="200px" height="150px" align="center"><br>
+      <p> <img src="/static/{{ img }}/1.jpg" width="200px" height="150px" align="center"><br>
         <br>
       </p>
       <table width="800" border="1">
@@ -130,7 +130,7 @@
           </tr>
         </tbody>
       </table>
-      {% if item.status == '正常，待机' %}
+      {% if item.status == '正常，待机' or ' 正常，待机' %}
       <h3><font color="green">可预约</font></h3><br/>
       {% else %}
       <h3><font color="red">不可预约</font></h3><br/>
@@ -138,8 +138,10 @@
       <input type="submit" name="print" value="信息打印"><br /><br />
       <a href="javascript:history.back()">返回上页</a>
   </div>
-  <div id="tabcontent2"><img src="/static/{{ img }}" width="800px" height="600px" align="center"><br></div>
-
+  <div id="tabcontent2">
+      {% for i in num %}
+      <img src="/static/{{ img }}/{{ i }}.jpg" width="800px" height="600px" align="center"><br><br>
+      {% endfor %}</div>
 <div id="tabcontent3" class="ct">待补充</div>
 
 <div id="tabcontent4" class="ct">
@@ -154,7 +156,7 @@
             </tr>
     </table><br />
 
-    {% if item.status == '正常，待机' %}
+    {% if item.status == '正常，待机' or ' 正常，待机' %}
       <h3><font color="green">可预约</font></h3><br/>
       <input type="submit" name="booke" value="线上预约">
       {% else %}

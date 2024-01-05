@@ -76,7 +76,7 @@ body {
 }
 
 .main{
-    height: 450px;
+    height: 500px;
     background-color: lightyellow;
     padding: 20px;
 }
@@ -90,7 +90,7 @@ body {
     line-height: 70%;
     padding: 20px;
     font-size: 20px;
-    height: 400px;
+    height: 450px;
     text-align: center;
 }
 
@@ -100,7 +100,7 @@ body {
     background-color: lightsalmon;
     padding: 20px;
     line-height: 150%;
-    height: 400px;
+    height: 450px;
     text-align: center;
 }
 
@@ -122,9 +122,9 @@ body {
 
 .focus {
     top:5px;
-    height: 280px;
+    height: 398px;
     width: 100%;
-    background-color: #e35f5f;
+    background-color: lightyellow;
 }
 
 /* 底部 */

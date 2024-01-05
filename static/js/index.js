@@ -3,8 +3,8 @@ window.addEventListener('load', function() {
       spaceBetween: 30,
       centeredSlides: true,
       autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
+        delay: 3000,
+        disableOnInteraction: true,
       },
       pagination: {
         el: ".swiper-pagination",

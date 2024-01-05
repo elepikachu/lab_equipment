@@ -28,14 +28,19 @@
         line-height: 70%;
         text-align: center;
     }
+
+    .show h5 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
 </style>
-<script src="{% static 'js/swiper.min.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
 <script src="{% static 'js/index.js' %}"></script>
 </head>
 <body>
-<form id="f" action="" method="post">
+<form id="f" action="/" method="post">
 {% csrf_token %}
 <div class="header">
     <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
@@ -75,14 +80,14 @@
 
       </div>
       <div class="show">
-          <h5>仪器展示</h5>
+          <h5>仪器设备</h5>
           <div class="focus">
     <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide"><a href="equipment/detail/1"><img src="{% static 'image/1.jpg' %}" width="656px" height="400px" align="center"></a></div>
-      <div class="swiper-slide"><a href="equipment/detail/5"><img src="{% static 'image/5.jpg' %}" width="656px" height="400px" align="center"></a></div>
-      <div class="swiper-slide"><a href="equipment/detail/14"><img src="{% static 'image/14.jpg' %}" width="656px" height="400px" align="center"></a></div>
-      <div class="swiper-slide"><a href="equipment/detail/17"><img src="{% static 'image/17.jpg' %}" width="656px" height="400px" align="center"></a></div>
+      <div class="swiper-slide"><a href="equipment/detail/1"><img src="{% static 'image/1/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
+      <div class="swiper-slide"><a href="equipment/detail/5"><img src="{% static 'image/5/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
+      <div class="swiper-slide"><a href="equipment/detail/14"><img src="{% static 'image/21/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
+      <div class="swiper-slide"><a href="equipment/detail/17"><img src="{% static 'image/17/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>

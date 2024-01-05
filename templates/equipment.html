@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-<title>{{ ver }}-设备信息</title>
+<title>{{ ver }}-仪器列表</title>
 <link rel="shortcut icon" href="{% static 'image/logo.png' %}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,41 +23,41 @@
 
         window.onload = function() {
             const table = document.getElementById('mytable');
-            console.log(table)
             const l = table.rows.length;
-            console.log(l)
+            for (let i = 1; i < l; i++) {
+                table.rows[i].cells[1].innerText = i;
+            }
             let cnt = 0;
             let tmp = '';
             let startval = 0;
             for (let i = 0; i < l; i++) {
                 const val = table.rows[i].cells[0].innerText;
                 if (i === l - 1) {
-                    {#table.rows[i].removeChild(table.rows[i].cells[0])#}
-                    table.rows[startval].cells[0].rowSpan = cnt + 1
+                    table.rows[startval].cells[0].rowSpan = cnt + 1;
                 }
                 if (val !== tmp) {
                     if (i !== 0) {
-                        table.rows[startval].cells[0].rowSpan = cnt
+                        table.rows[startval].cells[0].rowSpan = cnt;
                     }
                     cnt = 1;
                     tmp = val;
                     startval = i;
                 } else {
                     cnt++;
-                    table.rows[i].removeChild(table.rows[i].cells[0])
+                    table.rows[i].removeChild(table.rows[i].cells[0]);
                 }
             }
         }
     </script>
 </head>
 <body>
-<form action="/equipment" method="post">
+<form action="/" method="post">
 {% csrf_token %}
 <div class="header">
     <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
       <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
     </a>
-  <h1>&nbsp;&nbsp;{{ ver }}-设备信息</h1>
+  <h1>&nbsp;&nbsp;中国石油&nbsp;|&nbsp;{{ ver }}-仪器列表</h1>
     <div class="right" style="top: 30%">
         <input name="word" placeholder="请输入关键词">
         <input type="submit" value="搜索" name="search">
@@ -88,10 +88,11 @@
       <a href="javascript:jumpp()">查找</a><br /><br />
       <hr /><br />
 
-      <h3>{{ loc }}仪器列表 - {{ type }}</h3><br/>
+      <h3>{{ loc }}仪器列表 - {{ classic }}</h3><br/>
     <table border="1" id="mytable">
         <tr>
             <th>分类</th>
+            <th>序号</th>
             <th>设备名称</th>
             <th>仪器品牌</th>
             <th>仪器型号</th>
@@ -103,6 +104,7 @@
         {% for item in data %}
             <tr>
                 <td>{{ item.classic }}</td>
+                <td>0</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.brand }}</td>
                 <td>{{ item.num }}</td>

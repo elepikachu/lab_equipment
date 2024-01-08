@@ -141,7 +141,7 @@
           </tr>
         </tbody>
       </table>
-      {% if item.status == '正常，待机' or ' 正常，待机' %}
+      {% if item.status == '正常，待机'%}
       <h3><font color="green">可预约</font></h3><br/>
       {% else %}
       <h3><font color="red">不可预约</font></h3><br/>
@@ -167,7 +167,7 @@
             </tr>
     </table><br />
 
-    {% if item.status == '正常，待机' or ' 正常，待机' %}
+      {% if item.status == '正常，待机'%}
       <h3><font color="green">可预约</font></h3><br/>
       <input type="submit" name="booke" value="线上预约" onclick="alert('本仪器暂未开放线上预约');return false;">
       {% else %}
@@ -181,7 +181,7 @@
 
 <div class="footer">
   <h2>
-      powered by CNPC
+      Powered by CNPC
   </h2>
 </div>
 </form>

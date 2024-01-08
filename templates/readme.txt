@@ -1,9 +1,6 @@
-food 随机选择工具
-project 项目管理工具
-fuelcell 燃料电池介绍界面
-checal 化工计算器
-Info 说明
-main 首页
-Update 更新日志
-Buyitem 物资采购工具
-Music 音乐播放器
+contact 联系我们
+detail 设备详情页
+equipment 设备检索页
+info 平台简介
+main 网站主页
+question 常见问题

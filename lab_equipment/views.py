@@ -25,9 +25,9 @@ def main_view(request):
             if item.city not in city_box:
                 city_box.append(item.city)
         cnt['a'] = all_data.count()
-        cnt['b'] = all_data.filter(status__exact='正常，运转' or ' 正常，运转').count()
-        cnt['c'] = all_data.filter(status__exact='正常，待机' or ' 正常，待机').count()
-        cnt['d'] = all_data.filter(status__exact='停机，待维修' or ' 停机，待维修').count()
+        cnt['b'] = all_data.filter(status__exact='正常，运转').count()
+        cnt['c'] = all_data.filter(status__exact='正常，待机').count()
+        cnt['d'] = all_data.filter(status__exact='停机，待维修').count()
         dic = {'ver': VERSION, 'class': class_box, 'city': city_box, 'cnt': cnt}
         return render(request, 'main.html', dic)
     elif request.method == 'POST':

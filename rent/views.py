@@ -1,4 +1,4 @@
-from django.db.models import Case, When, Value
+from django.db.models import Case, When, Value, Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import Item
@@ -35,27 +35,36 @@ def equipment_view(request):
         elif 'word' in request.GET:
             word = request.GET['word']
             classic = '关键词：' + word
-            data = data = Item.objects.filter(name__contains=word).order_by(type_order)
+            data = Item.objects.filter(Q(name__icontains=word) | Q(brand__icontains=word) | Q(num__icontains=word) |
+                                       Q(classic__icontains=word)).order_by(type_order)
         else:
             data = all_data.order_by(type_order)
             classic = '全部'
         ver = VERSION
         return render(request, 'equipment.html', locals())
     if request.method == 'POST':
-        word = request.POST['word']
-        return HttpResponseRedirect(
-            'equipment?word=%s' % (word))
+        if 'search' in request.POST:
+            word = request.POST['word']
+            return HttpResponseRedirect(
+                'equipment?word=%s' % (word))
 
 
 def detail_view(request, item_id):
-    item = Item.objects.get(id=item_id)
-    item.time = item.time.strftime('%Y年%m月%d日')
-    classic = item.classic
-    loc = item.city
-    data = Item.objects.filter(classic__exact=classic, city__exact=loc)
-    img = 'image/' + str(item.id)
-    num = []
-    for i in range(item.image):
-        num.append(i+1)
-    ver = VERSION
-    return render(request, 'detail.html', locals())
+    if request.method == 'GET':
+        item = Item.objects.get(id=item_id)
+        item.time = item.time.strftime('%Y年%m月%d日')
+        classic = item.classic
+        loc = item.city
+        data = Item.objects.filter(classic__exact=classic, city__exact=loc)
+        img = 'image/' + str(item.id)
+        num = []
+        for i in range(item.image):
+            num.append(i+1)
+        ver = VERSION
+        return render(request, 'detail.html', locals())
+    if request.method == 'POST':
+        if 'booke' in request.POST:
+            pass
+        if 'print' in request.POST:
+            pass
+

@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>{{ ver }}-设备信息</title>
-<link rel="shortcut icon" href="{% static 'image/icon.ico' %}">
+<link rel="shortcut icon" href="{% static 'image/logo.png' %}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -46,9 +46,20 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 <script src="{% static 'js/easytabs.js' %}"></script>
+<script>
+    function print_doc() {
+        const mytable = document.getElementsByName('mytable')[0];
+        const printhtml = mytable.innerHTML;
+        const old = document.body.innerHTML;
+        document.body.innerHTML = printhtml;
+        window.print();
+        document.body.innerHTML = old;
+        return false;
+    }
+</script>
 </head>
 <body>
-<form action="/equipment/" method="post">
+<form action="/equipment/detail" method="post">
 {% csrf_token %}
 <div class="header">
     <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
@@ -89,7 +100,7 @@
 </li>
 </ul>
 </div>
-  <div id="tabcontent1">
+  <div id="tabcontent1" name="mytable">
       <h2>{{ item.name }}</h2>
       <p> <img src="/static/{{ img }}/1.jpg" width="200px" height="150px" align="center"><br>
         <br>
@@ -135,7 +146,7 @@
       {% else %}
       <h3><font color="red">不可预约</font></h3><br/>
       {% endif %}
-      <input type="submit" name="print" value="信息打印"><br /><br />
+      <input type="submit" name="print" value="信息打印" onclick="print_doc()"><br /><br />
       <a href="javascript:history.back()">返回上页</a>
   </div>
   <div id="tabcontent2">
@@ -158,10 +169,10 @@
 
     {% if item.status == '正常，待机' or ' 正常，待机' %}
       <h3><font color="green">可预约</font></h3><br/>
-      <input type="submit" name="booke" value="线上预约">
+      <input type="submit" name="booke" value="线上预约" onclick="alert('本仪器暂未开放线上预约');return false;">
       {% else %}
       <h3><font color="red">不可预约</font></h3><br/>
-      <input type="submit" name="notify" value="可用时通知我">
+      <input type="submit" name="notify" value="可用时通知我" onclick="alert('功能尚未上线');return false;">
       {% endif %}
 </div>
     </div>

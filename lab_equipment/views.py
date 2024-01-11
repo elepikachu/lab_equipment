@@ -4,6 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.http import require_GET
 from rent.models import Item, Suggestion
+from pyecharts.charts import Bar
+from pyecharts.globals import ThemeType
+from pyecharts import options as opt
 
 
 VERSION = '装备所仪器设备共享平台'
@@ -28,7 +31,20 @@ def main_view(request):
         cnt['b'] = all_data.filter(status__exact='正常，运转').count()
         cnt['c'] = all_data.filter(status__exact='正常，待机').count()
         cnt['d'] = all_data.filter(status__exact='停机，待维修').count()
-        dic = {'ver': VERSION, 'class': class_box, 'city': city_box, 'cnt': cnt}
+        cnt['e'] = all_data.filter(city__exact='北京').count()
+        cnt['f'] = all_data.filter(city__exact='廊坊').count()
+        bar1 = Bar(init_opts=opt.InitOpts(theme=ThemeType.MACARONS))
+        bar1.add_xaxis(['共计', '在用', '待机', '在修'])
+        bar1.add_yaxis('设备数', [cnt['a'], cnt['b'], cnt['c'], cnt['d']])
+        bar1.set_global_opts(title_opts=opt.TitleOpts(title='设备使用情况统计图'))
+        chart_option1 = bar1.dump_options_with_quotes()
+        bar2 = Bar(init_opts=opt.InitOpts(theme=ThemeType.PURPLE_PASSION))
+        bar2.add_xaxis(['共计', '北京', '廊坊'])
+        bar2.add_yaxis('设备数', [cnt['a'], cnt['e'], cnt['f']])
+        bar2.set_global_opts(title_opts=opt.TitleOpts(title='设备区域统计图'))
+        chart_option2 = bar2.dump_options_with_quotes()
+        dic = {'ver': VERSION, 'class': class_box, 'city': city_box, 'cnt': cnt, 'crt': chart_option1,
+               'ctr': chart_option2}
         return render(request, 'main.html', dic)
     elif request.method == 'POST':
         if 'search' in request.POST:

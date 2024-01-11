@@ -15,6 +15,7 @@
     .bottom {
         background-image: url({% static 'image/cnpc_r.png' %});
         background-size: cover;
+        text-align: center;
     }
 
     .main {
@@ -33,11 +34,38 @@
         margin-top: 0;
         margin-bottom: 20px;
     }
+
+    .chart-container {
+        height: 220px;
+        background: rgba(255,255,255,0.6);
+    }
+
+    #clock {
+        font-size: 20px;
+    }
+
 </style>
 <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'js/echarts.min.js' %}"></script>
 <script src="{% static 'js/index.js' %}"></script>
+<script>
+    function updateTime() {
+        const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = timeString;
+    }
+
+    setInterval(updateTime, 1000);
+</script>
 </head>
 <body>
 <form id="f" action="/" method="post">
@@ -46,8 +74,8 @@
     <a href="https://www.cnpc.com.cn/cnpc/index.shtml">
       <img src="{% static 'image/logo.png' %}" width="60px" height="60px" align="center">
     </a>
-  <h1>&nbsp;&nbsp;中国石油&nbsp;|&nbsp;{{ ver }}</h1>
-    <div class="right" style="top: 30%">
+    <h1>&nbsp;&nbsp;中国石油&nbsp;|&nbsp;{{ ver }}<div class="right"><div id="clock"></div></div></h1>
+    <div class="right">
         <input name="word" placeholder="请输入关键词">
         <input type="submit" value="搜索" name="search">
     </div>
@@ -75,9 +103,13 @@
               <option>{{ item }}</option>
           {% endfor %}
           </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br ></br ></br >
-      <a href="javascript:void(0)" onclick="document.getElementById('f').submit();return false;">查找</a><br /><br /><br /><br />
-
-
+      <a href="javascript:void(0)" onclick="document.getElementById('f').submit();return false;">查找</a><br /><br />
+      <div id="chart-container2" class="chart-container"></div>
+      <script>
+        var chart_data2 = {{ ctr|safe }};
+        var myChart = echarts.init(document.getElementById('chart-container2'));
+        myChart.setOption(chart_data2);
+      </script>
       </div>
       <div class="show">
           <h5>仪器设备</h5>
@@ -86,7 +118,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide"><a href="equipment/detail/1"><img src="{% static 'image/1/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
       <div class="swiper-slide"><a href="equipment/detail/5"><img src="{% static 'image/5/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
-      <div class="swiper-slide"><a href="equipment/detail/14"><img src="{% static 'image/21/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
+      <div class="swiper-slide"><a href="equipment/detail/21"><img src="{% static 'image/21/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
       <div class="swiper-slide"><a href="equipment/detail/17"><img src="{% static 'image/17/1.jpg' %}" width="616px" height="250px" align="center"></a></div>
     </div>
     <div class="swiper-button-next"></div>
@@ -101,6 +133,12 @@
       {{ cnt.b }}台正在使用<br/>
       {{ cnt.c }}台待机中<br/>
       {{ cnt.d }}台维修中<br/>
+      <div id="chart-container" class="chart-container"></div>
+      <script>
+        var chart_data = {{ crt|safe }};
+        var myChart = echarts.init(document.getElementById('chart-container'));
+        myChart.setOption(chart_data);
+      </script>
   </div>
   </div>
 

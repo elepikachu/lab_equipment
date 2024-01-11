@@ -11,9 +11,9 @@ var tablink_idname = new Array("tablink")
 //Set the id name of your tabcontentarea (without a number at the end)
 var tabcontent_idname = new Array("tabcontent") 
 //Set the number of your tabs
-var tabcount = new Array("4")
+var tabcount = new Array("7")
 //Set the Tab wich should load at start (In this Example:Tab 2 visible on load)
-var loadtabs = new Array("1")  
+var loadtabs = new Array("2")
 //Set the Number of the Menu which should autochange (if you dont't want to have a change menu set it to 0)
 var autochangemenu = 0;
 //the speed in seconds when the tabs should change

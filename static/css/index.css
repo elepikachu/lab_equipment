@@ -21,7 +21,7 @@ body {
     float: left;
 }
 
-.header .right {
+.right {
     float: right;
 }
 
@@ -106,6 +106,8 @@ body {
 
 .side, .bottom, .show h5 {
     font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .side select {
